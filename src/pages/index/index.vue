@@ -1,130 +1,65 @@
 <template>
-  <div @click="clickHandle">
-    <header id="top"> <!-- 内容显示区域 ：width : 1211px -->
-      <div id="top_box" class="user">
-        <ul>
-          <li><span><i class="iconfont">&#xe630;</i> 用户: 用户名占位</span></li>
-          <li><a href="{% url 'logout' %}">退出登录</a></li>
-<!--          判断未登陆时显示登陆/注册按钮-->
-<!--          {% else %}-->
-<!--          <li><a href="{% url 'login' %}">登录</a></li>-->
-<!--          <li><a href="{% url 'register' %}">注册</a></li>-->
-<!--          {% endif %}-->
-        </ul>
-      </div>
-    </header>
-    <div class="userinfo" @click="bindViewTap">
-      <img class="userinfo-avatar" src="/static/images/logo.png" background-size="cover" />
-
-      <div class="userinfo-nickname">
-        <card text="欢迎来到小羽毛报名系统~"></card>
-      </div>
-    </div>
+  <div class="index">
+<!--    <header>-->
+<!--      <a href="/pages/counter/main" class="counter">-->
+<!--        到{{store.getters.languageText}}-->
+<!--        <span>&gt;</span>-->
+<!--      </a>-->
+<!--      <a>{{test}}</a>-->
+<!--    </header>-->
     <main>
-      <h3>所有活动</h3>
-      <ul>
-        <li>
-          <h4><span>{{ i.activity_name }}</span><a href="/new_user/activity/{{ i.activity_number }}.html">查看详情</a></h4>
-          <p>
-            <span class="time"><i class="iconfont timeFlag" >&#xe67d;</i>&nbsp;{{ i.activity_start_time}}-{{i.activity_end_time.time}}</span>
-            <span class="place"><i class="iconfont placeFlag" >&#xe609;</i>&nbsp;{{ i.activity_place}}</span>
-            <span ><i class="iconfont fullFlag" >&#xe6b9;</i>&nbsp; <em>{{ i.is_full}}</em></span>
-          </p>
-        </li>
-      </ul>
-    <a href="/pages/counter/main" class="counter"> > 查看详情</a>
+      <!--      原文：<textarea v-model={q}   @change="changeText" />-->
+      <!--      译文：：<textarea v-model={result}     />-->
     </main>
+    <button @click="greet">test</button>
+
   </div>
 </template>
 
 <script>
-import card from '@/components/card'
+  import card from '@/components/card'
+  import store from '../../store/store'
 
 export default {
-  data () {
-    return {
-      motto: 'Hello miniprograme',
-      userInfo: {
-        nickName: 'mpvue',
-        avatarUrl: 'http://mpvue.com/assets/logo.png'
-      }
-    }
-  },
+    store,
+    components: {
+      card
+    },
 
-  components: {
-    card
-  },
-
-  methods: {
-    bindViewTap () {
-      const url = '../user/main'
-      if (mpvuePlatform === 'wx') {
-        mpvue.switchTab({ url })
-      } else {
-        mpvue.navigateTo({ url })
+    methods: {
+      changeText () {
+        console.log(555)
+      },
+      greet () {
+        store.commit('turn')
+        console.log(11111)
+        console.log(this.$store.state.q)
       }
     },
-    clickHandle (ev) {
-      console.log('clickHandle:', ev)
-      // throw {message: 'custom test'}
-    }
-  },
 
-  created () {
-    // let app = getApp()
+    created () {
+      console.log('created')
+      console.log(this.$store.getters.languageText)
+      // let app = getApp()
+    }
   }
-}
 </script>
 
-<style scoped>
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+<style>
+  .index {
+    margin: 20px;
+  }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
+  header a {
+    border: 1px solid red;
+    background-color: #f1f8ff;
+    padding: 4px;
+  }
 
-.userinfo-nickname {
-  color: #aaa;
-}
+  header a span {
+    border-bottom: 1px solid green;
+    transform: rotate(90deg);
+  }
 
-.usermotto {
-  margin-top: 150px;
-}
 
-.form-control {
-  display: block;
-  padding: 0 12px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-}
-.all{
-  width:7.5rem;
-  height:1rem;
-  background-color:blue;
-}
-.all:after{
-  display:block;
-  content:'';
-  clear:both;
-}
-.left{
-  float:left;
-  width:3rem;
-  height:1rem;
-  background-color:red;
-}
-
-.right{
-  float:left;
-  width:4.5rem;
-  height:1rem;
-  background-color:green;
-}
 </style>

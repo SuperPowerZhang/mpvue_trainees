@@ -1,11 +1,6 @@
 <template>
   <div class="counter-warp">
-    <p>这里是详情页{{store.state.activity.name}}</p>
-    <p>
-
-      <button @click="joinIN">报名</button>
-<!--      <button @click="decrement">-</button>-->
-    </p>
+    <p>切换语言</p>
   </div>
 </template>
 
